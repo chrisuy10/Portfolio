@@ -1,4 +1,4 @@
-// Add an event listener for the DOM content to be loaded
+// Add an event listener for the DOM content to be loaded - try edit 
 document.addEventListener('DOMContentLoaded', function() {
   
     // Add an event listener for the checkout button
