@@ -1,4 +1,4 @@
-// Add an event listener for the DOM content to be loaded - try edit 
+// Add an event listener for the DOM content to be loaded - try edit - try pull
 document.addEventListener('DOMContentLoaded', function() {
   
     // Add an event listener for the checkout button
