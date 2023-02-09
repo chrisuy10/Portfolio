@@ -1,0 +1,136 @@
+<div id="background" style="display:none; "></div>
+<div id="popup" style="display:none;">          
+  <h3 class="addons-title">Would you like to add Add-ons?</h3>
+  <p class="addons-sub">Check the checbox you want to add on your order.</p>
+  <div class="row">              
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/Mini-Nutella-Jar-300x300.jpg?v=1670227825" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center" style="padding-left: 15px; padding-right: 15px;">
+        {{ all_products['mini-nutella-jar'].title }}<br>
+        <span class="price">{{ all_products['mini-nutella-jar'].price | money }}</span>
+        <input class="qty" style="display: inline-block;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['mini-nutella-jar'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/Hearts-300x300.jpg?v=1670227756" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['red-chocolate-hearts'].title }}<br>
+        <span class="price">{{ all_products['red-chocolate-hearts'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1" />
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['red-chocolate-hearts'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/Donut.png?v=1671073015" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        Mini Cinnamon Donuts 6pcs<br>
+        <span class="price">{{ all_products['mini-cinnamon-donuts'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['mini-cinnamon-donuts'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/Chuppachups-300x300.jpg?v=1671004986" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['5pcs-chuppa-chups'].title }}<br>
+        <span class="price">{{ all_products['5pcs-chuppa-chups'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['5pcs-chuppa-chups'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/TNT-300x300.jpg?v=1671005076" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['10pcs-tnt-warheads'].title }}<br>
+        <span class="price">{{ all_products['10pcs-tnt-warheads'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['10pcs-tnt-warheads'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/killerpythons-300x300.jpg?v=1671005100" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['allens-killer-pythons'].title }}<br>
+        <span class="price">{{ all_products['allens-killer-pythons'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['allens-killer-pythons'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/Snakes-alive-1-300x300.jpg?v=1671005137" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['allens-snakes-alive'].title }}<br>
+        <span class="price">{{ all_products['allens-snakes-alive'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['allens-snakes-alive'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/chocolates-600x600.jpg?v=1671004695" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['mixed-favourites'].title }}<br>
+        <span class="price">{{ all_products['mixed-favourites'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['mixed-favourites'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/Straps-600x600.jpg?v=1671004902" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center" style="margin-top: 10px; margin-bottom: 10px;">
+        {{ all_products['sour-straps'].title }}<br>
+        <span class="price">{{ all_products['sour-straps'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['sour-straps'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/sourworms-300x300.jpg?v=1671005009" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center" style="margin-top: 10px; margin-bottom: 10px;">
+        {{ all_products['sour-worms'].title }}<br>
+        <span class="price">{{ all_products['sour-worms'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['sour-worms'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/clouds-600x600.jpg?v=1671004656" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['strawberry-clouds'].title }}<br>
+        <span class="price">{{ all_products['strawberry-clouds'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['strawberry-clouds'].first_available_variant.id }}" />
+    </div>
+    <div class="col">              
+      <img class="addons-img" src="https://cdn.shopify.com/s/files/1/0680/7817/4509/products/cokebottles-300x300.jpg?v=1671004767" alt="{{ all_products['mini-nutella-jar'].title }}">                
+      <h3 class="center">
+        {{ all_products['trolli-cola-bottles'].title }}<br>
+        <span class="price">{{ all_products['trolli-cola-bottles'].price | money }}</span>
+        <input class="qty" style="display: none;" type="number" id="quantity" name="quantity" value="1"/>
+      </h3>
+      <input class="checkbox center" type="checkbox" id="checkbox-1">
+      <input type="hidden" name="id" value="{{ all_products['trolli-cola-bottles'].first_available_variant.id }}" />
+    </div>
+  </div>
+  <form action="/cart/add" method="post" class="note" >
+    <p class="note-text">Note: If you don't check the boxes it will not add to your order.</p>
+    <input type="hidden" name="id" id="ID_add" value="" />            
+    <div class="cart-div">
+      <div class="close-button" style="margin-right: 5%;">                
+        <input type="submit" value="Proceed to Checkout" id="add-to-cart" class="add_to_cart">
+      </div>
+    </div>
+  </form>
+</div>

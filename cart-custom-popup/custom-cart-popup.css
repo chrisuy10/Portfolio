@@ -1,0 +1,272 @@
+@media only screen and (max-width: 349px){
+    #popup {
+      min-width: 270px;
+      max-width: 330px;
+      width: 95%;
+    }
+    .row {
+      min-height: 370px;
+      max-height: 420px;
+    }
+    .note-text, .addons-sub {
+      font-size: 14px;
+    }
+    .addons-title, h3.center {
+      font-size: 16px;
+    }
+    .cart-div {
+      justify-content:center;
+    }
+  }
+  @media only screen and (min-width: 350px) and (max-width: 619px) {
+    #popup {
+      min-width: 360px;
+      max-width: 360px;
+      width: 95%;
+    }
+    .row {
+      min-height: 370px;
+      max-height: 420px;
+    }
+    .note-text, .addons-sub {
+      font-size: 14px;
+    }
+    .addons-title, h3.center {
+      font-size: 16px;
+    }
+    .cart-div {
+      justify-content:center;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    #popup {
+      min-width: 750px;
+      max-width: 1080px;
+      width: 75%;
+    }
+    .row {
+      min-height: 440px;
+      max-height: 470px;
+    }
+    .cart-div {
+      justify-content:right;
+      position: absolute;
+      top: 3%;
+    }
+    .note-text, .addons-sub, h3.center {
+      font-size: 16px;
+    }
+  }
+  @media only screen and (min-width: 620px) and (max-width: 1024px) {
+    #popup {
+      min-width: 620px;
+      max-width: 720px;
+      width: 80%;
+    }
+    .row {
+      min-height: 440px;
+      max-height: 470px;
+    }
+    .cart-div {
+      justify-content:right;
+    }
+    .note-text, .addons-sub, h3.center {
+      font-size: 16px;
+    }
+  }
+  /* 
+    #background is the CSS class for the background overlay that will appear
+    when the popup window is displayed. It has a fixed position, meaning it
+    will stay in the same place on the page even if the page is scrolled. It
+    takes up the full size of the page (top: 0, left: 0, right: 0, bottom: 0)
+    and has a semi-transparent black background color (rgba(0, 0, 0, 0.5)). 
+    The display is set to none, meaning it will not be visible until it is 
+    explicitly set to display: block. It has a z-index of 0, meaning it will
+    be behind any other elements with a higher z-index value.
+  */
+  #background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+  }
+  
+  /* 
+    #popup is the CSS class for the actual popup window that will appear on
+    top of the background overlay. It has a fixed position, meaning it will
+    stay in the same place on the page even if the page is scrolled. It is
+    positioned in the middle of the page (top: 50%, left: 50%) using the
+    "transform: translate(-50%, -50%)" property. It has a light pink
+    background color (#ffe6f1) and some padding (10px). It also has a
+    border (#e973a8) and a gray box-shadow. Its z-index is set to 1000,
+    meaning it will be on top of any other elements with a lower z-index value.
+  */
+  #popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffe6f1;
+    padding: 10px;
+    border: 1px #e973a8;
+    box-shadow: 2px 2px 5px gray;
+    z-index: 1001;
+  }
+  
+  /*
+    .container is a CSS class for a container that will hold other elements.
+    Its width is set to 95% of the available width, and it is centered using
+    the "margin: 0 auto" property.
+  */
+  .container {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  /*
+    .row is a CSS class for a row of elements. It uses flexbox layout, with
+    the "display: flex" property. The "flex-wrap: wrap" property means that
+    the elements in the row will wrap to the next line if they run out of
+    space in the row. The "justify-content: center" property centers the
+    elements horizontally. The "overflow-y: auto" property makes the row scrollable
+    if the content overflows the height of the row. The "row-gap: 0px" property
+    sets the gap between the rows to 0.
+  */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-y: auto;
+    row-gap: 0px;
+  }                  
+  .col {
+    /* Define the flexible item behavior with flex: 0 1 calc(33% - 1em) */
+    flex: 0 1 calc(33% - 1em);
+    /* Center the content horizontally and vertically */
+    justify-content: center;
+    text-align: center;
+    /* Add a border around the element */
+    border: 1px #e973a8;
+    /* Add a gray shadow around the element */
+    box-shadow: 2px 2px 5px gray;
+    /* Add some margin around the element */
+    margin: 5px;
+    /* Add some padding to the top of the element */
+    padding-top: 10px;
+    /* Set a maximum and minimum width for the element */
+    max-width: 160px;
+    min-width: 160px;
+    /* Make the width of the element equal to 100% */
+    width: 100%;
+    /* Make the height of the element equal to 100% */
+    height: 100%;
+    /* Set the maximum height of the element to fit its content */
+    max-height: fit-content;
+  }
+  
+  .addons-img {
+    /* Add a circular border around the image */
+    border-radius: 50%;
+    /* Hide any content that overflows the border */
+    overflow: hidden;
+    /* Center the image horizontally and vertically */
+    margin: 0 auto;
+    /* Set the width and height of the image to 80px */
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  p, h3 {
+    /* Align the top of the elements */
+    vertical-align: top;
+    /* Add some margin to the bottom and top of the elements */
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  h4 {
+    /* Display the element as a flex container */
+    display: flex;
+    /* Center the content horizontally and vertically */
+    justify-content: center;
+    align-items: center;
+    /* Set the height of the element to 50% */
+    height: 50%;
+    /* Remove the margin from the top of the element */
+    margin-top: 0;
+  }
+  
+  input[type='checkbox'] {
+    /* Set the width and height of the checkbox to 30px */
+    width: 30px;
+    height: 30px;
+    /* Center the checkbox horizontally and vertically */
+    margin: auto;
+    border: 2px solid #e973a8;
+  }
+  
+  .price-and-qty {
+    /* Display the element as a flex container */
+    display: flex;
+    /* Align the items in the center */
+    align-items: center;
+  }
+  
+  .price {
+    /* Make the text bold */
+    font-weight: bold;
+    /* Align the items in the center */
+    align-items: center;
+    /* Add some margin to the top of the element */
+    margin-top: 5px
+  }          
+  /* Style for the quantity section of the cart */
+  .qty {
+    display: flex; /* Display the contents in a row */
+    align-items: center; /* Align the contents to the center vertically */
+    width: 40%; /* Set the width to 40% of the container */
+    height: 25px; /* Set the height to 25px */
+    text-align: center; /* Align the text to the center */
+    margin-left: 10px; /* Add a margin of 10px on the left */
+    border-color: #e973a870; /* Set the border color */
+    background-color: #ffe6f1; /* Set the background color */
+    color: #e973a8; /* Set the text color */
+    font-size: 16px; /* Set the font size to 16px */
+  }
+  
+  /* Style for the "Add to Cart" button */
+  .add_to_cart {
+    height: 50px; /* Set the height to 50px */
+    font-size: 20px; /* Set the font size to 20px */
+    color: #e973a8; /* Set the text color */
+    cursor: pointer; /* Make the cursor into a pointer */
+    justify-content: center; /* Center the contents horizontally */
+    background-color: #ffe6f1; /* Set the background color */
+    border-color: #e973a8; /* Set the border color */
+    box-shadow: 2px 2px 5px grey; /* Add a grey box shadow */
+    border: 1px; /* Add a border */
+  }
+  
+  /* Style for the cart container */
+  .cart-div {
+    display: flex; /* Display the contents in a row */
+    width: 100%; /* Set the width to 100% of the container */
+  }
+  
+  /* Style for the center container */
+  .center {
+    margin: auto; /* Automatically add margins */
+    width: 100%; /* Set the width to 100% of the container */
+    padding: 0px 10px 10px 10px; /* Add a padding of 10px on all sides */
+  }
+  
+  /* Style for the note */
+  .note {
+    margin-bottom: 0px; /* Remove the bottom margin */
+    margin-top: 0px; /* Remove the top margin */
+  }
+  
