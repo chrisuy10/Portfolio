@@ -1,30 +1,37 @@
 <?php
-include 'email_sender.php';
+include  "database.php";
+//for testing http://mailsender.test/reference-code/mailsender/
+?>
 
-class EmailBody {
-    public function getBody($name) {
-        return "
-        <html>
-        <body>
-            <h2>Hello!</h2>
-            <p>This is an example HTML email body.</p><br>
-            <p><b>Testing HTML email body.</b></p>
-            <p>Hello $name</p>
-        </body>    
-        </html>";
-    }
-}
+<form action="insert.php" method="post">
+    <label for="yearsem">Year and Semester:</label>
+    <input type="text" id="yearsem" name="yearsem"><br><br>
 
-$send_to = 'chrisbenedictuy19@gmail.com';
-$send_to_name = 'benedict uy';
-$subject = 'Test subject';
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="firstname"><br><br>
 
-$name_contact = "Benedict Christian";
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname"><br><br>
 
-$emailBody = new EmailBody();
-$body = $emailBody->getBody($name_contact);
+    <label for="studentID">Student ID:</label>
+    <input type="text" id="studentID" name="studentID"><br><br>
 
+    <label for="course">Course:</label>
+    <input type="text" id="course" name="course"><br><br>
 
-$mailer = new Mailer();
-    $result = $mailer->sendMail($send_to, $send_to_name, $subject, $body);
-echo $result;
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br><br>
+
+    <label for="rfid">RFID:</label>
+    <input type="text" id="rfid" name="rfid"><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<br><br>
+<form action="submit_rfid.php" method="post">
+    <label for="rfid">RFID:</label>
+    <input type="text" id="rfid" name="rfid"><br><br>
+
+    <input type="submit" value="Submit">
+</form>
