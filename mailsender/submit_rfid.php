@@ -10,24 +10,36 @@ $sql = "SELECT * FROM tbl_students WHERE fld_rfid = '$rfid' LIMIT 1";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    // If the RFID exists, fill the table with the data
+    // If the RFID exists, get the data for the card
     $row = mysqli_fetch_assoc($result);
     $yearsem = $row['fld_yearsem'];
-    $date = date("Y-m-d"); // Set the date to today's date
+    $firstname = $row['fld_firstname'];
+    $lastname = $row['fld_lastname'];
     $studentID = $row['fld_studentID'];
+    $course = $row['fld_course'];
+    $email = $row['fld_email'];
+
+
+    $date = date("Y-m-d"); // Set the date to today's date
     $status = 'Present'; // Set the status to 'Present' by default
 
     $sql2 = "INSERT INTO tbl_attendance_records (fld_yearsem, fld_date, fld_studentID, fld_status) 
     VALUES ('$yearsem', '$date', '$studentID', '$status')";
+    mysqli_query($conn, $sql2);
 
-    if (mysqli_query($conn, $sql2)) {
-        echo "Attendance recorded successfully";
-    } else {
-        echo "Error: " . $sql2 . "<br>" . mysqli_error($conn);
-    }
+    // Return the response message with the student's data
+    $response = "<div class='card'>
+                    <h1>Student Information</h1>
+                    <p><strong>Name:</strong> $firstname $lastname</p>
+                    <p><strong>Student ID:</strong> $studentID</p>
+                    <p><strong>Course:</strong> $course</p>
+                    <p><strong>Email:</strong> $email</p>
+                 </div>";
 } else {
-    echo "RFID not found";
+    $response = "RFID not found";
 }
+
+echo $response;
 
 // Close the database connection
 mysqli_close($conn);
