@@ -27,6 +27,11 @@ include  "database.php";
         }
 
     </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
 </head>
 
 <body>
@@ -53,8 +58,11 @@ include  "database.php";
         <label for="rfid">RFID:</label>
         <input type="text" id="rfid" name="rfid"><br><br>
 
-        <input type="submit" value="Submit">
+        <input type="submit" name="enroll" value="Submit">
     </form>
+<?php
+	include "insert.php";
+?> 
 
     <br><br>
     <h1>Check Attendance</h1>
@@ -62,8 +70,8 @@ include  "database.php";
         <label>RFID:</label>
         <input type="text" name="rfid"><br><br>
         <label>Date:</label>
-        <input type="date" name="date"><br><br>
-        <button type="submit" name="submit">Check Attendance</button>
+        <input type="text" id="datepickers" name="date"><br><br>
+        <button type="submit" name="checking">Check Attendance</button>
     </form>
 <?php
 	include "attendance-checker.php";
@@ -79,4 +87,21 @@ include  "database.php";
 <?php
 	include "submit_rfid.php";
 ?>
+
+    <br><br>
+    <h1>Marked Absent all</h1>
+    <form method="POST" action="">
+        <label for="datepicker">Date:</label>
+        <input type="text" id="datepicker" name="date">
+        <button type="submit" name="absentnow">Submit</button>
+    </form>
+<?php
+	include "absentnow.php";
+?>
 </body>
+<script>
+	$(function() {
+		$("#datepicker").datepicker({dateFormat: 'yy-mm-dd'}).val(new Date().toISOString().slice(0, 10));
+        $("#datepickers").datepicker({dateFormat: 'yy-mm-dd'}).val(new Date().toISOString().slice(0, 10));
+	});
+</script>

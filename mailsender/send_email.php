@@ -16,15 +16,14 @@ class EmailBody {
 }
 
 $send_to = 'chrisbenedictuy19@gmail.com';
-$send_to_name = 'benedict uy';
-$subject = 'Test subject';
+$send_to_name = 'Student';
+$subject = 'Absent Notification';
 
-$name_contact = "Benedict Christian";
 
 $emailBody = new EmailBody();
-$body = $emailBody->getBody($name_contact);
+//$body = $emailBody->getBody($send_to_name);
 
 
-$mailer = new Mailer();
-    $result = $mailer->sendMail($send_to, $send_to_name, $subject, $body);
-echo $result;
+//$mailer = new Mailer();
+//$result = $mailer->sendMail($send_to, $send_to_name, $subject, $body);
+

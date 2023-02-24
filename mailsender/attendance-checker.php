@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['submit'])) {
+if (isset($_POST['checking'])) {
     // Get the form data
     $rfid = $_POST['rfid'];
     $date = $_POST['date'];
