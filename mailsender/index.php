@@ -1,107 +1,247 @@
 <?php
-include  "database.php";
+include  "function.php";
 //for testing http://mailsender.test/reference-code/mailsender/
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>RFID Attendance</title>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
-        .card {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-            margin: 20px auto;
-            max-width: 400px;
-            padding: 20px;
-            text-align: center;
-        }
+		.navbar {
+			background-color: #4CAF50;
+		}
 
-        .card h1 {
-            font-size: 1.5em;
-            margin-bottom: 0.5em;
-        }
+		.nav-link {
+			color: #FFFFFF;
+		}
 
-        .card p {
-            font-size: 1.2em;
-        }
+		.footer {
+			background-color: #4CAF50;
+			color: #FFFFFF;
+			padding: 20px;
+		}
 
-    </style>
+		.card {
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+			margin: 20px auto;
+			max-width: 400px;
+			padding: 20px;
+			text-align: center;
+		}
 
+		.card h1 {
+			font-size: 1.5em;
+			margin-bottom: 0.5em;
+		}
+
+		.card p {
+			font-size: 1.2em;
+		}
+
+		form {
+			margin-top: 20px;
+		}
+        body {
+			background-color: #f2f2f2;
+		}
+		.container {
+			background-color: white;
+			margin-top: 50px;
+			padding: 50px;
+			border-radius: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		}
+		h1 {
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		input[type="submit"] {
+			margin-top: 20px;
+		}
+	</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 	
 </head>
 
 <body>
-    <h1>Enroll Student Details</h1>
-    <form action="insert.php" method="post">
-        <label for="yearsem">Year and Semester:</label>
-        <input type="text" id="yearsem" name="yearsem"><br><br>
+<nav class="navbar navbar-expand-lg navbar-light">
+		<a class="navbar-brand" href="#">RFID Attendance</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Enroll Students</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Check Attendance</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Attendance Log</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Mark Absent</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Attendance Record</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+    <div class="container">
+		<h1>Enroll Student Details</h1>
+		<form action="" method="post">
+			<div class="form-group">
+				<label for="yearsem">Year and Semester:</label>
+				<input type="text" class="form-control col-md-6" id="yearsem" name="yearsem">
+			</div>
 
-        <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname"><br><br>
-
-        <label for="lastname">Last Name:</label>
-        <input type="text" id="lastname" name="lastname"><br><br>
-
-        <label for="studentID">Student ID:</label>
-        <input type="text" id="studentID" name="studentID"><br><br>
-
-        <label for="course">Course:</label>
-        <input type="text" id="course" name="course"><br><br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email"><br><br>
-
-        <label for="rfid">RFID:</label>
-        <input type="text" id="rfid" name="rfid"><br><br>
-
-        <input type="submit" name="enroll" value="Submit">
-    </form>
-<?php
-	include "insert.php";
-?> 
+			<div class="form-group row">
+                <div class="col-md-6">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname">
+                </div>
+                <div class="col-md-6">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label for="studentID">Student ID:</label>
+                    <input type="text" class="form-control" id="studentID" name="studentID">
+                </div>
+                <div class="col-md-6">
+                    <label for="course">Course:</label>
+                    <input type="text" class="form-control" id="course" name="course">
+                </div>
+            </div>
+			<div class="form-group row">
+                <div class="col-md-6">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="col-md-6">
+                    <label for="rfid">RFID:</label>
+                    <input type="text" class="form-control" id="rfid" name="rfid">
+                </div>
+            </div>
+			<input type="submit" class="btn btn-primary" name="enroll" value="Submit">
+		</form>
+        <?php 
+            if (isset($_POST['enroll'])) {
+                insert($conn);
+            }
+        ?>
+	</div>
 
     <br><br>
-    <h1>Check Attendance</h1>
-    <form method="POST" action="">
-        <label>RFID:</label>
-        <input type="text" name="rfid"><br><br>
-        <label>Date:</label>
-        <input type="text" id="datepickers" name="date"><br><br>
-        <button type="submit" name="checking">Check Attendance</button>
-    </form>
-<?php
-	include "attendance-checker.php";
-?>   
+    <div class="container">
+		<h1>Check Attendance</h1>
+		<form method="POST" action="">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="datepickers" name="date">
+                </div>
+                <div class="col-md-6">
+                    <label for="rfid">RFID:</label>
+                    <input type="text" class="form-control" name="rfid">
+                </div>
+            </div>
+			<button type="submit" class="btn btn-primary" name="checking">Check Attendance</button>
+		</form>
+        <?php
+            if (isset($_POST['checking'])) {
+                attendance_checker($conn);
+            }
+        ?>
+	</div> 
     
     <br><br>
-	<h1>RFID Attendance</h1>
-	<form method="post" action="">
-		<label>RFID:</label>
-		<input type="text" name="rfid">
-		<button type="submit" name="attendance_log">Submit</button>
-	</form>
-<?php
-	include "submit_rfid.php";
-?>
+	<div class="container">
+		<h1>RFID Attendance</h1>
+		<form method="post" action="">
+			<div class="form-group">
+				<label for="rfid">RFID:</label>
+				<input type="text" class="form-control col-md-4" name="rfid">
+			</div>
+			<button type="submit" class="btn btn-primary" name="attendance_log">Submit</button>
+		</form>
+        <?php
+            if (isset($_POST['attendance_log'])) {
+                submit_rfid($conn);
+            }
+        ?>
+	</div>
 
     <br><br>
-    <h1>Marked Absent all</h1>
-    <form method="POST" action="">
-        <label for="datepicker">Date:</label>
-        <input type="text" id="datepicker" name="date">
-        <button type="submit" name="absentnow">Submit</button>
-    </form>
-<?php
-	include "absentnow.php";
-?>
+    <div class="container">
+		<h1>Marked Absent all</h1>
+		<form method="POST" action="">
+            <div class="form-group">
+				<label for="date">Date:</label>
+				<input type="date" class="form-control col-md-4" id="datepicker" name="date">
+			</div>
+		    <button type="submit" class="btn btn-primary" name="absentnow">Submit</button>
+		</form>
+        <?php
+            if (isset($_POST['absentnow'])) {
+                marked_absent($conn);
+            }
+        ?>
+	</div>
+
+    <h1>Check Attendance Record</h1>
+	<form id="attendanceForm" action="" method="POST">
+		<label for="rfid">RFID:</label>
+		<input type="text" id="rfid" name="rfid" required>
+		<br><br>
+		<label for="start_date">Start Date:</label>
+		<input type="date" id="start_date" name="start_date" required>
+		<br><br>
+		<label for="end_date">End Date:</label>
+		<input type="date" id="end_date" name="end_date" required>
+		<br><br>
+		<button type="submit" name="checking2" >Check Attendance</button>
+	</form>
+	<div id="response"></div>
+    <?php include "attendance-checker.php"; ?>
+	<script>
+		// Send form data to the PHP script for checking attendance records
+		const attendanceForm = document.querySelector('#attendanceForm');
+		attendanceForm.addEventListener('submit', (e) => {
+			//e.preventDefault();
+			const formData = new FormData(attendanceForm);
+			fetch('attendance-checker.php', {
+				method: 'POST',
+				body: formData
+			})
+			.then(response => response.text())
+			.then(data => {
+				document.querySelector('#response').innerHTML = data;
+			})
+			.catch(error => {
+				console.error(error);
+			})
+		});
+	</script>
+
 </body>
-<script>
-	$(function() {
-		$("#datepicker").datepicker({dateFormat: 'yy-mm-dd'}).val(new Date().toISOString().slice(0, 10));
-        $("#datepickers").datepicker({dateFormat: 'yy-mm-dd'}).val(new Date().toISOString().slice(0, 10));
-	});
-</script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
