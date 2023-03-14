@@ -102,7 +102,7 @@ include  "function.php";
 		</div>
 	</nav>
     <div class="container">
-		<h1>Enroll Student Details</h1>
+		<h1>Enroll Student Details</h1><hr>
 		<form action="" method="post">
 			<div class="form-group">
 				<label for="yearsem">Year and Semester:</label>
@@ -204,41 +204,32 @@ include  "function.php";
             }
         ?>
 	</div>
+    
+    <div class="container">
+        <h1 class="text-center">Check Attendance Record</h1>
+        <form id="attendanceForm" action="" method="POST">
+            <div class="form-group">
+                <label for="rfid">RFID:</label>
+                <input type="text" id="rfid" name="rfid" class="form-control col-md-4" required>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" id="start_date" name="start_date" class="form-control " required>
+                </div>
+                <div class="col-md-4">
+                    <label for="end_date">End Date:</label>
+                    <input type="date" id="end_date" name="end_date" class="form-control" required>
+                </div>
+            </div>
+            <button type="submit" name="checking2" class="btn btn-primary">Check Attendance</button>
+        </form>
+        <div id="response" class="mt-4"></div>
+        <?php include "attendance-checker.php"; ?>
+        
+	</div>
+    
 
-    <h1>Check Attendance Record</h1>
-	<form id="attendanceForm" action="" method="POST">
-		<label for="rfid">RFID:</label>
-		<input type="text" id="rfid" name="rfid" required>
-		<br><br>
-		<label for="start_date">Start Date:</label>
-		<input type="date" id="start_date" name="start_date" required>
-		<br><br>
-		<label for="end_date">End Date:</label>
-		<input type="date" id="end_date" name="end_date" required>
-		<br><br>
-		<button type="submit" name="checking2" >Check Attendance</button>
-	</form>
-	<div id="response"></div>
-    <?php include "attendance-checker.php"; ?>
-	<script>
-		// Send form data to the PHP script for checking attendance records
-		const attendanceForm = document.querySelector('#attendanceForm');
-		attendanceForm.addEventListener('submit', (e) => {
-			//e.preventDefault();
-			const formData = new FormData(attendanceForm);
-			fetch('attendance-checker.php', {
-				method: 'POST',
-				body: formData
-			})
-			.then(response => response.text())
-			.then(data => {
-				document.querySelector('#response').innerHTML = data;
-			})
-			.catch(error => {
-				console.error(error);
-			})
-		});
-	</script>
 
 </body>
 
