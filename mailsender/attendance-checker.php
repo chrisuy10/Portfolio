@@ -3,7 +3,7 @@
 $start_date = "";
 $end_date = "";
 
-if(isset($_POST['checking2'])){
+if(isset($_POST['check_display'])){
   $rfid = $_POST['rfid'];
   $start_date = $_POST['start_date'];
   $end_date = $_POST['end_date'];

@@ -1,5 +1,6 @@
 <?php
 include  "function.php";
+
 //for testing http://mailsender.test/reference-code/mailsender/
 ?>
 <!DOCTYPE html>
@@ -207,7 +208,7 @@ include  "function.php";
     
     <div class="container">
         <h1 class="text-center">Check Attendance Record</h1>
-        <form id="attendanceForm" action="" method="POST">
+        <form id="attendanceForm"  method="POST">
             <div class="form-group">
                 <label for="rfid">RFID:</label>
                 <input type="text" id="rfid" name="rfid" class="form-control col-md-4" required>
@@ -222,10 +223,12 @@ include  "function.php";
                     <input type="date" id="end_date" name="end_date" class="form-control" required>
                 </div>
             </div>
-            <button type="submit" name="checking2" class="btn btn-primary">Check Attendance</button>
+			<input type="hidden" name="content" id="content">
+            <button type="submit" name="checking2" class="btn btn-primary" formaction="export-attendance.php">Export Data</button>
+			<button type="submit" name="check_display" class="btn btn-primary" formaction="">Display/Check Attendance</button>
         </form>
         <div id="response" class="mt-4"></div>
-        <?php include "attendance-checker.php"; ?>
+        <?php include 'attendance-checker.php'; ?>
         
 	</div>
     
@@ -235,4 +238,10 @@ include  "function.php";
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script>
+		var divContent = document.getElementById("response").innerHTML;
+
+		// Set the content to the hidden input field
+		document.getElementById("content").value = divContent;
+	</script>
 
