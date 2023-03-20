@@ -21,8 +21,37 @@ function database(){
     }
     return $conn;
 }
-
 function insert($conn){
+    // Get the form data
+    $yearsem = $_POST['yearsem'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $studentID = $_POST['studentID'];
+    $course = $_POST['course'];
+    $email = $_POST['email'];
+    $rfid = $_POST['rfid'];
+
+    // Prepare a statement with placeholders
+    $stmt = mysqli_prepare($conn, "INSERT INTO tbl_students (fld_yearsem, fld_firstname, fld_lastname, fld_studentID, fld_course, fld_email, fld_rfid) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+    // Bind variables to the placeholders
+    mysqli_stmt_bind_param($stmt, "sssssss", $yearsem, $firstname, $lastname, $studentID, $course, $email, $rfid);
+
+    // Execute the statement
+    if (mysqli_stmt_execute($stmt)) {
+        $insert_result = "New record created successfully";
+    } else {
+        $insert_result = "Error: " . mysqli_error($conn);
+    }
+
+    // Close the statement
+    mysqli_stmt_close($stmt);
+
+    // Return the insert result
+    return $insert_result;
+}
+function insert1($conn){
     
     // Get the form data
     $yearsem = $_POST['yearsem'];
@@ -45,7 +74,7 @@ function insert($conn){
 }
 
 function submit_rfid($conn){
-
+    $phone = 639385129959;
     // Get the form data
     $rfid = $_POST['rfid'];
     
@@ -77,7 +106,44 @@ function submit_rfid($conn){
                     <p><strong>Student ID:</strong> $studentID</p>
                     <p><strong>Course:</strong> $course</p>
                     <p><strong>Email:</strong> $email</p>
-                </div>";        
+                </div>"; 
+        
+                $curl = curl_init();
+                $data = array(
+                  'api_key' => "2N85dnCuQl4PQoAWlSTE5P0YmZ5",
+                  'api_secret' => "9ps3D8bMRFe4pShXmDwhq4I1vc0ghqYwJg3AQT6F",
+                  'text' => "Hello!
+            
+                    Thank you for doing a message trial. This is a test message from Benedict
+            
+                    Have a great day ahead.",
+                  'to' => "$phone",
+                  'from' => "Attendance Monitoring"
+                );
+            
+                curl_setopt_array($curl, array(
+                  CURLOPT_URL => "https://api.movider.co/v1/sms",
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_TIMEOUT => 30,
+                  CURLOPT_CUSTOMREQUEST => "POST",
+                  CURLOPT_POSTFIELDS => http_build_query($data),
+                  CURLOPT_HTTPHEADER => array(
+                    "Content-Type: application/x-www-form-urlencoded",
+                    "cache-control: no-cache"
+                  ),
+                ));
+            
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+            
+                curl_close($curl);
+            
+                if ($err) {
+                  echo "cURL Error #:" . $err;
+                } else {
+                  echo $response;
+                }
+
     } else {
         $card =  "RFID not found";
     }

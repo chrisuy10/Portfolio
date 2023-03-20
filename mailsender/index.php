@@ -145,6 +145,7 @@ include  "function.php";
         <?php 
             if (isset($_POST['enroll'])) {
                 insert($conn);
+				echo $insert_result;
             }
         ?>
 	</div>
