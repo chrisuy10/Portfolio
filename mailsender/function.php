@@ -71,7 +71,7 @@ function insert1($conn){
         $insert_result = "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
     echo $insert_result;
-}
+} 
 
 function submit_rfid($conn){
     $phone = 639385129959;
@@ -114,7 +114,7 @@ function submit_rfid($conn){
                   'api_secret' => "9ps3D8bMRFe4pShXmDwhq4I1vc0ghqYwJg3AQT6F",
                   'text' => "Hello!
             
-                    Thank you for doing a message trial. This is a test message from Benedict
+                    Student Name is Present, TIME IN at Time
             
                     Have a great day ahead.",
                   'to' => "$phone",
