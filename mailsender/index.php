@@ -102,7 +102,7 @@ include  "function.php";
 			</ul>
 		</div>
 	</nav>
-    <div class="container">
+    <div id="enroll" class="container">
 		<h1>Enroll Student Details</h1><hr>
 		<form action="" method="post" enctype="multipart/form-data">
 			<div class="form-group">
@@ -168,6 +168,7 @@ include  "function.php";
             if (isset($_POST['enroll'])) {
                 insert($conn);
 				echo $insert_result;
+				echo "<script>document.getElementById('enroll').scrollIntoView();</script>";
             }
         ?>
 	</div> 
@@ -185,6 +186,7 @@ include  "function.php";
         <?php
             if (isset($_POST['attendance_log'])) {
                 submit_rfid($conn);
+				echo "<script>document.getElementById('output').scrollIntoView();</script>";
             }
         ?>
 	</div>

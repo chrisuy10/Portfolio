@@ -123,7 +123,7 @@ function submit_rfid($conn){
 
         }       
         // Output the response message with the student's data
-        $card = "<div class='card' style='min-width: 60%;'>
+        $card = "<div class='card' id='output' style='min-width: 60%;'>
                     <div style='display: flex; justify-content: space-between; align-items: center;'>
                         <div class='col-md-4'>
                             <img src='$profile_pic_path' alt='Profile Picture' style='max-width: 100px;'>
