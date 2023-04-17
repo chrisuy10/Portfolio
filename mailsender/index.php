@@ -174,7 +174,7 @@ include  "function.php";
 	</div> 
     
     <br><br>
-	<div class="container">
+	<div id="log_rfid" class="container">
 		<h1>RFID Attendance</h1>
 		<form method="post" action="">
 			<div class="form-group">
@@ -186,7 +186,7 @@ include  "function.php";
         <?php
             if (isset($_POST['attendance_log'])) {
                 submit_rfid($conn);
-				echo "<script>document.getElementById('output').scrollIntoView();</script>";
+				echo "<script>document.getElementById('log_rfid').scrollIntoView();</script>";
             }
         ?>
 	</div>

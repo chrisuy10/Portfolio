@@ -114,19 +114,21 @@ function submit_rfid($conn){
             // If the student has already logged in, update the time out
             $sql_update = "UPDATE tbl_attendance_records SET fld_timeout='$time' WHERE fld_studentID='$studentID' AND fld_date='$date'";
             mysqli_query($conn, $sql_update);
-            //$status = 'Time out'; // Set the status to 'Time out'
+            $log_status = 'Time Out'; // Set the status to 'Time out'
+
         } else {
             // If the student hasn't logged in, insert a new attendance record with time in
             $sql_insert = "INSERT INTO tbl_attendance_records (fld_yearsem, fld_date, fld_studentID, fld_status, fld_timein, fld_timeout) 
                VALUES ('$yearsem', '$date', '$studentID', '$status', '$time', NULL)";
             mysqli_query($conn, $sql_insert);
+            $log_status = 'Time In'; // Set the status to 'Time In'
 
-        }       
-        // Output the response message with the student's data
+        }      
+        // Output the response message with the student's data and attendance status
         $card = "<div class='card' id='output' style='min-width: 60%;'>
                     <div style='display: flex; justify-content: space-between; align-items: center;'>
                         <div class='col-md-4'>
-                            <img src='$profile_pic_path' alt='Profile Picture' style='max-width: 100px;'>
+                            <img src='$profile_pic_path' alt='Profile Picture' style='max-width: 150px;'>
                         </div>
                         <div class='col-md-8'>
                             <h2>Student Information</h2>
@@ -135,6 +137,8 @@ function submit_rfid($conn){
                             <p><strong>Course:</strong> $course</p>
                             <p><strong>Address:</strong> $address</p>
                             <p><strong>Emergency Contact No.:</strong> $phone</p>
+                            <p><strong>Attendance Status:</strong> $status</p>
+                            <h2 class='badge badge-pill badge-" . ($log_status == 'Time In' ? 'success' : 'danger') . "' STYLE='font-size:150%;'>$log_status</h2>
                         </div>                
                     </div>
                 </div>";
