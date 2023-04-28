@@ -2,6 +2,7 @@
 
 $conn = database();
 $insert_result = '';
+$update_result = '';
 $response = '';
 $card = '';
 $marked_absent_result = '';
@@ -71,16 +72,16 @@ function submit_rfid($conn){
         $card = "<div class='card' id='output' style='min-width: 60%;'>
                     <div style='display: flex; justify-content: space-between; align-items: center;'>
                         <div class='col-md-4'>
-                            <img src='$profile_pic_path' alt='Profile Picture' style='max-width: 150px;'>
+                            <img src='$profile_pic_path' alt='Profile Picture' style='max-width: 250px;'>
                         </div>
                         <div class='col-md-8'>
                             <h2>Student Information</h2>
-                            <p style='text-align:left; font-size=25px;'><strong>Name:</strong> $firstname $lastname</p>
-                            <p style='text-align:left; font-size=25px;'><strong>Student ID:</strong> $studentID</p>
-                            <p style='text-align:left; font-size=25px;'><strong>Course:</strong> $course</p>
-                            <p style='text-align:left; font-size=25px;'><strong>Address:</strong> $address</p>
-                            <p style='text-align:left; font-size=25px;'><strong>Emergency Contact No.:</strong> $phone</p>
-                            <p style='text-align:left; font-size=25px;'><strong>Attendance Status:</strong> $status</p>
+                            <p style='text-align:left; font-size:25px;'><strong>Name:</strong> $firstname $lastname</p>
+                            <p style='text-align:left; font-size:25px;'><strong>Student ID:</strong> $studentID</p>
+                            <p style='text-align:left; font-size:25px;'><strong>Course:</strong> $course</p>
+                            <p style='text-align:left; font-size:25px;'><strong>Address:</strong> $address</p>
+                            <p style='text-align:left; font-size:25px;'><strong>Emergency Contact #:</strong> $phone</p>
+                            <p style='text-align:left; font-size:25px;'><strong>Attendance Status:</strong> $status</p>
                             <h2 class='badge badge-pill badge-" . ($log_status == 'Time In' ? 'success' : 'danger') . "' STYLE='font-size:150%;'>$log_status</h2>
                         </div>                
                     </div>
@@ -225,9 +226,81 @@ function insert($conn){
     if (empty($yearsem) || empty($firstname) || empty($lastname) || empty($studentID) || empty($course) || empty($phone) || empty($rfid) || empty($address)) {
         $insert_result = "Error: Please fill in all fields";
     } else {
+        // Check if a record with the same name and RFID already exists
+        $stmt = mysqli_prepare($conn, "SELECT * FROM tbl_students WHERE fld_firstname = ? AND fld_lastname = ? AND fld_rfid = ?");
+        mysqli_stmt_bind_param($stmt, "sss", $firstname, $lastname, $rfid);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($result) > 0) {
+            // A record with the same name and RFID already exists, call the update function
+            update($conn);
+        } else {
+            // Prepare a statement with placeholders
+            $stmt = mysqli_prepare($conn, "INSERT INTO tbl_students (fld_yearsem, fld_firstname, fld_lastname, fld_studentID, fld_course, fld_phone, fld_rfid, fld_address, fld_profile_pic) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+            // Get the uploaded file
+            $file = $_FILES['profile-pic'];
+
+            // Check if a file was uploaded
+            if (!empty($file['name'])) {
+                // Get the file extension
+                $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+
+                // Generate a unique file name
+                $filename = $rfid . '.' . $extension;
+
+                // Save the file to the server
+                move_uploaded_file($file['tmp_name'], 'uploads/' . $filename);
+
+                // Set the file path for the database
+                $file_path = 'uploads/' . $filename;
+            } else {
+                // No file was uploaded, set the file path to NULL
+                $file_path = NULL;
+            }
+
+            // Bind variables to the placeholders
+            mysqli_stmt_bind_param($stmt, "sssssssss", $yearsem, $firstname, $lastname, $studentID, $course, $phone, $rfid, $address, $file_path);
+
+            // Execute the statement
+            if (mysqli_stmt_execute($stmt)) {
+                $insert_result = "New record created successfully";
+            } else {
+                $insert_result = "Error: " . mysqli_error($conn);
+            }
+
+            // Close the statement
+            mysqli_stmt_close($stmt);
+
+            // Return the insert result
+            return $insert_result;
+        }
+    }
+
+    
+}
+
+
+
+function update($conn){
+    // Get the form data
+    //$yearsem = $_POST['yearsem'];
+    //$firstname = $_POST['firstname'];
+    //$lastname = $_POST['lastname'];
+    //$studentID = $_POST['studentID'];
+    //$course = $_POST['course'];
+    //$phone = $_POST['phone'];
+    //$rfid = $_POST['rfid'];
+    //$address = $_POST['address'];
+
+    // Check if all fields are filled
+    if (empty($id) || empty($yearsem) || empty($firstname) || empty($lastname) || empty($studentID) || empty($course) || empty($phone) || empty($rfid) || empty($address)) {
+        $insert_result = "Error: Please fill in all fields";
+    } else {
         // Prepare a statement with placeholders
-        $stmt = mysqli_prepare($conn, "INSERT INTO tbl_students (fld_yearsem, fld_firstname, fld_lastname, fld_studentID, fld_course, fld_phone, fld_rfid, fld_address, fld_profile_pic) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = mysqli_prepare($conn, "UPDATE tbl_students SET fld_yearsem = ?, fld_firstname = ?, fld_lastname = ?, fld_studentID = ?, fld_course = ?, fld_phone = ?, fld_rfid = ?, fld_address = ? WHERE id = ?");
 
         // Get the uploaded file
         $file = $_FILES['profile-pic'];
@@ -238,7 +311,7 @@ function insert($conn){
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
 
             // Generate a unique file name
-            $filename = uniqid() . '.' . $extension;
+            $filename = $rfid . '.' . $extension;
 
             // Save the file to the server
             move_uploaded_file($file['tmp_name'], 'uploads/' . $filename);
@@ -251,11 +324,11 @@ function insert($conn){
         }
 
         // Bind variables to the placeholders
-        mysqli_stmt_bind_param($stmt, "sssssssss", $yearsem, $firstname, $lastname, $studentID, $course, $phone, $rfid, $address, $file_path);
+        mysqli_stmt_bind_param($stmt, "sssssssssi", $yearsem, $firstname, $lastname, $studentID, $course, $phone, $rfid, $address, $file_path, $id);
 
         // Execute the statement
         if (mysqli_stmt_execute($stmt)) {
-            $insert_result = "New record created successfully";
+            $insert_result = "Record updated successfully";
         } else {
             $insert_result = "Error: " . mysqli_error($conn);
         }
@@ -264,8 +337,9 @@ function insert($conn){
         mysqli_stmt_close($stmt);
     }
 
-    // Return the insert result
+    // Return the update result
     return $insert_result;
+
 }
 
 

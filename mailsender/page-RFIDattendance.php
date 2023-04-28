@@ -1,4 +1,12 @@
 <?php include "header.php" ?>
+<style>
+    body {
+    z-index: 0;
+    background-image: url('images/banner-dog.jpg');
+    background-size: cover; /* to cover the entire screen */
+    background-repeat: no-repeat; /* to avoid repeating the image */
+    }
+</style>
 <body>
 	<?php include "nav.php"; ?>
 	<div id="log_rfid" class="container-fluid">
