@@ -1,7 +1,7 @@
 <?php include "header.php" ?>
 <body>
 	<?php include "nav.php"; ?>
-    
+
     <div id="enroll" class="container">
 		<h1>Register Student Details</h1><hr>
 		<form action="" method="post" enctype="multipart/form-data">
@@ -16,7 +16,6 @@
 
 				</select>
 			</div>
-
 
 			<div class="form-group row">
                 <div class="col-md-6">
@@ -73,13 +72,14 @@
         ?>
 	</div>
 
+
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
-    var divContent = document.getElementById("response").innerHTML;
+    //var divContent = document.getElementById("response").innerHTML;
 
     // Set the content to the hidden input field
-    document.getElementById("content").value = divContent;
+    //document.getElementById("content").value = divContent;
 </script>
