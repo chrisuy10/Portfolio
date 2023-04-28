@@ -1,5 +1,4 @@
 <?php
-//testing
 $conn = database();
 $insert_result = '';
 $response = '';
@@ -22,64 +21,6 @@ function database(){
     }
     return $conn;
 }
-function insert2($conn){
-    // Get the form data
-    $yearsem = $_POST['yearsem'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $studentID = $_POST['studentID'];
-    $course = $_POST['course'];
-    $phone = $_POST['phone'];
-    $rfid = $_POST['rfid'];
-    $address = $_POST['address'];
-
-    // Check if all fields are filled
-    if (empty($yearsem) || empty($firstname) || empty($lastname) || empty($studentID) || empty($course) || empty($phone) || empty($rfid) || empty($address)) {
-        $insert_result = "Error: Please fill in all fields";
-    } else {
-        // Prepare a statement with placeholders
-        $stmt = mysqli_prepare($conn, "INSERT INTO tbl_students (fld_yearsem, fld_firstname, fld_lastname, fld_studentID, fld_course, fld_phone, fld_rfid, fld_address) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
-        // Bind variables to the placeholders
-        mysqli_stmt_bind_param($stmt, "ssssssss", $yearsem, $firstname, $lastname, $studentID, $course, $phone, $rfid, $address);
-
-        // Execute the statement
-        if (mysqli_stmt_execute($stmt)) {
-            $insert_result = "New record created successfully";
-        } else {
-            $insert_result = "Error: " . mysqli_error($conn);
-        }
-
-        // Close the statement
-        mysqli_stmt_close($stmt);
-    }
-
-    // Return the insert result
-    return $insert_result;
-}
-
-function insert1($conn){
-    
-    // Get the form data
-    $yearsem = $_POST['yearsem'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $studentID = $_POST['studentID'];
-    $course = $_POST['course'];
-    $phone = $_POST['phone'];
-    $rfid = $_POST['rfid'];
-    
-    // Insert the data into the table
-    $sql = "INSERT INTO tbl_students (fld_yearsem, fld_firstname, fld_lastname, fld_studentID, fld_course, fld_phone, fld_rfid) 
-    VALUES ('$yearsem', '$firstname', '$lastname', '$studentID', '$course', '$phone', '$rfid')";
-    if (mysqli_query($conn, $sql)) {
-        $insert_result = "New record created successfully";
-    } else {
-        $insert_result = "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    echo $insert_result;
-} 
 
 function submit_rfid($conn){
     //$phone = 639385129959;
