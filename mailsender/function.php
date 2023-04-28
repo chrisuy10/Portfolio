@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
-=======
 
->>>>>>> 61efcc89b93c103936a4a9635f066d99a534ba7c
 $conn = database();
 $insert_result = '';
 $response = '';
@@ -78,12 +75,12 @@ function submit_rfid($conn){
                         </div>
                         <div class='col-md-8'>
                             <h2>Student Information</h2>
-                            <p><strong>Name:</strong> $firstname $lastname</p>
-                            <p><strong>Student ID:</strong> $studentID</p>
-                            <p><strong>Course:</strong> $course</p>
-                            <p><strong>Address:</strong> $address</p>
-                            <p><strong>Emergency Contact No.:</strong> $phone</p>
-                            <p><strong>Attendance Status:</strong> $status</p>
+                            <p style='text-align:left; font-size=25px;'><strong>Name:</strong> $firstname $lastname</p>
+                            <p style='text-align:left; font-size=25px;'><strong>Student ID:</strong> $studentID</p>
+                            <p style='text-align:left; font-size=25px;'><strong>Course:</strong> $course</p>
+                            <p style='text-align:left; font-size=25px;'><strong>Address:</strong> $address</p>
+                            <p style='text-align:left; font-size=25px;'><strong>Emergency Contact No.:</strong> $phone</p>
+                            <p style='text-align:left; font-size=25px;'><strong>Attendance Status:</strong> $status</p>
                             <h2 class='badge badge-pill badge-" . ($log_status == 'Time In' ? 'success' : 'danger') . "' STYLE='font-size:150%;'>$log_status</h2>
                         </div>                
                     </div>
@@ -122,9 +119,9 @@ function submit_rfid($conn){
             
                 if ($err) {
                   echo "cURL Error #:" . $err;
-                } else {
-                  echo $response;
-                }
+                }// else {
+                 // echo $response;
+                //}
 
     } else {
         $card =  "RFID not found";
