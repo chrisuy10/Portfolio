@@ -1,4 +1,8 @@
 <?php
+<<<<<<< HEAD
+=======
+
+>>>>>>> 61efcc89b93c103936a4a9635f066d99a534ba7c
 $conn = database();
 $insert_result = '';
 $response = '';
