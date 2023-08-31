@@ -1,0 +1,158 @@
+
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer="defer"></script>
+
+{%- style -%}
+  .sticky-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999; /* Ensure it appears above other content */
+    
+  }
+  .announcement-bar-custom {
+    position: relative;
+    padding: 5px;
+    overflow: hidden;
+    background-color: {{ section.settings.announcement_bar_color }};
+  }
+  
+  .announcement-slider-custom {
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .slide-custom {
+    flex: 0 0 100%;
+    align-items: center;
+    text-decoration: none;
+    color: {{ section.settings.announcement_bar_text_color }};
+  }
+  
+{%- endstyle -%}
+{%- if section.settings.sticky_announcement == true -%}
+    <style>body {padding-top: 60px;}</style>
+{%- else -%}
+    <style>body {padding-top: 1px;}</style>
+{%- endif -%}
+
+{%- if section.settings.show_announcement -%}
+  {%- if section.settings.home_page_only == false or template.name contains 'index' -%}
+    
+    {%- capture positionStyle -%}
+      {%- if section.settings.sticky_announcement == true -%}
+        position: fixed;
+      {%- else -%}
+        position: relative;
+      {%- endif -%}
+    {%- endcapture -%}
+    
+    <div class="sticky-container" style="{{ positionStyle }}">
+      <div id="announcement-bar" class="announcement-bar-custom" >
+        <div class="announcement-slider-custom">
+          <div class="slide-custom">
+            <a href="{{ section.settings.link1 | escape }}" class="slide-custom" style="">
+              <p><center>{{ section.settings.text1 | escape }}</center></p>
+            </a>
+          </div>
+          <div class="slide-custom">
+            <a href="{{ section.settings.link2 | escape }}" class="slide-custom" style="">
+              <center>{{ section.settings.text2 | escape }}</center>
+            </a>
+          </div>      
+        </div>
+      </div>
+    </div>
+
+  {%- endif -%}
+{%- endif -%}
+
+
+<script>
+  var slideInterval = {{ section.settings.slide_interval | default: 10000 }};
+</script>
+
+{% javascript %}
+
+  $(document).ready(function(){
+  
+    $('.announcement-slider-custom').slick({
+      arrows: false,
+      dots: false,
+      autoplay: true,
+      autoplaySpeed: slideInterval, // Change slide every 5 seconds
+      pauseOnHover: false, // Disable pause on hover..
+    });
+    //console.log(slideintervals);
+  });
+  
+
+{% endjavascript %}
+
+
+{% schema %}
+{
+  "name": "Custom Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": "Home page only",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_announcement",
+      "label": "Sticky Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_color",
+      "label": "Background color",
+      "default": "#e973a8"
+    },
+	{
+      "type": "color",
+      "id": "announcement_bar_text_color",
+      "label": "Text color",
+      "default": "#ffe6f1"
+    },
+    {
+      "type": "text",
+      "id": "text1",
+      "label": "Announcement text 1",
+      "default": "WE DELIVER UP TO 45KM FROM BEVERLY HILLS 2209,NSW"
+    },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Announcement text 2",
+      "default": "MON TO FRI - ORDER BEFORE 10:30 AM FOR SAME DAY DELIVERY & BEFORE 9:00 AM FOR SATURDAY"
+    },
+    {
+      "type": "url",
+      "id": "link1",
+      "label": "Announcement link 1"
+    },
+    {
+      "type": "url",
+      "id": "link2",
+      "label": "Announcement link 2"
+    },
+    {
+      "type": "number",
+      "id": "slide_interval",
+      "label": "Slide transition interval (ms)",
+      "default": 10000
+    }
+  ]
+}
+{% endschema %}
