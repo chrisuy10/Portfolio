@@ -32,23 +32,15 @@
   
 {%- endstyle -%}
 {%- if section.settings.sticky_announcement == true -%}
-    <style>body {padding-top: 60px;}</style>
+    <style>.header-wrapper {padding-top: 40px;} .sticky-container { position: fixed; }</style>
 {%- else -%}
-    <style>body {padding-top: 1px;}</style>
+    <style>.header-wrapper {padding-top: 1px;} .sticky-container { position: relative; }</style>
 {%- endif -%}
 
 {%- if section.settings.show_announcement -%}
   {%- if section.settings.home_page_only == false or template.name contains 'index' -%}
     
-    {%- capture positionStyle -%}
-      {%- if section.settings.sticky_announcement == true -%}
-        position: fixed;
-      {%- else -%}
-        position: relative;
-      {%- endif -%}
-    {%- endcapture -%}
-    
-    <div class="sticky-container" style="{{ positionStyle }}">
+    <div class="sticky-container">
       <div id="announcement-bar" class="announcement-bar-custom" >
         <div class="announcement-slider-custom">
           <div class="slide-custom">
@@ -71,9 +63,6 @@
 
 <script>
   var slideInterval = {{ section.settings.slide_interval | default: 10000 }};
-</script>
-
-{% javascript %}
 
   $(document).ready(function(){
   
@@ -87,7 +76,9 @@
     //console.log(slideintervals);
   });
   
+</script>
 
+{% javascript %}
 {% endjavascript %}
 
 
