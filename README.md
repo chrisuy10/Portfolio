@@ -68,7 +68,7 @@
   - Putty
   - PHP, Liquid and Json(for schema)
   - HTML, CSS, Javascript, Jquery,
-  - 
+  - Wordpress, Woocommerce, Shopify (basic)
   # Current Self-studying and practicing
   - Explore more on Woocommerce and Shopify coding or API integration.
   - Version control (Connecting Cloudways to git)
