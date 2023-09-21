@@ -1,5 +1,7 @@
 # Updating codes for reference
 
+# Summary of this repository and anything I've worked on
+
 # Links of Projects and Website handled
 # Top 3 is the most I've worked on, and other than that is only some modification like, updating banners, media contents, address details, and etc. 
 # https://daddydonuts.com.au/
@@ -52,3 +54,27 @@
 # https://yagacorporation.com.au/
 
 
+# Software Applications, Programming Languages and Tools, I experienced to used while working
+  # Basic
+  - Microsoft office Excel, Word, Powerpoint (for documentation and other purposes)
+  - Outlook, Viber and Whatsapp (for communications)
+  - Photoshop portable (for image compressing and resizing)
+  - Jira
+  - Utilizing AI software assistance for research and study (ChatGPT, Perflexity)
+  # For Web Development, Coding, Designing and etc.
+  - Visual Studio Code and Github 
+  - FileZilla (file explorer SFTP connection to server)
+  - Cloudways (host server)
+  - Putty
+  - PHP, Liquid and Json(for schema)
+  - HTML, CSS, Javascript, Jquery,
+  - 
+  # Current Self-studying and practicing
+  - Explore more on Woocommerce and Shopify coding or API integration.
+  - Version control (Connecting Cloudways to git)
+  - React.js and how to apply in frontend of wordpress and shopify
+  - Figma for Web Designing
+  - Gutenberg Page Builder (wordpress default editor)
+  - Creating Local Web applications systems using laragon, Mysql, PHP, HTML, CSS, JS
+    - recent project creating classroom attendance system, with SMS notification and generating PDF file for reporting.
+    - purpose is to improve my existing skills, and create some helpful system on basic problems or application inside an office or schools or business.
