@@ -22,7 +22,7 @@
  - Maintenance and updates of website media contents
  - Page Builder used is UX Builder from flatsome theme
  - Troubleshooting and debugging when errors or bugs encountered
-     Some of modification and design I worked on the website
+   * Some of modification and design I worked on the website
    - Create and design Rubbish removal Page
    - updating page design, contents, product descriptions and etc.
    - removing pages such as shop, product pages, due to this is customized to use only book a bin page to order no need for shop page and individual product pages.
@@ -41,7 +41,7 @@
  - Maintenance and updates of website media contents
  - Page Builder used is UX Builder from flatsome theme
  - Troubleshooting and debugging when errors or bugs encountered
-     Some of modification and design I worked on the website
+   * Some of modification and design I worked on the website
    - Create and design Waste Management page based on sketch design given
    - adding of products with new category, modify menus to the add new categories.
    - create popups for certain marketting campaigns with discount code that can copy.
