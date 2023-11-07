@@ -1,0 +1,426 @@
+
+<style>
+    .multiselect {
+      width: 90%;
+    }
+    
+    .selectBox {
+      position: relative;
+    }
+    
+    .selectBox select {
+      width: 100%;
+      font-weight: bold;
+font-size: 14px;
+    }
+    
+    .overSelect {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+    
+    #checkboxes {
+      display: none;
+      border: 1px #dadada solid;
+
+    }
+    
+    #checkboxes label {
+      display: block;
+    position: relative;
+    height: 30px;
+    font-size: 20px;
+margin: 5px;
+    }
+    .inlineLeft, .inlineRight {
+        position: absolute;
+        display: inline;
+    }
+    .inlineRight {
+        right: 0;
+    }
+    
+    #checkboxes label:hover {
+      background-color: #1e90ff;
+    }
+      .quantity-input {
+        width: 50px; 
+        height: 25px;
+margin: 2px; 
+color:black;  
+    }
+    .quantity-input::placeholder {
+  color: gray; /* Change the placeholder text color to gray */
+}
+.checkbox-variation{
+        margin: 5px;
+height: 15px;
+width: 15px;
+    }
+</style>
+
+<div class="multiselect">
+    <div class="selectBox">
+      <select id="options-select">
+        <option value="">Choose an option / Not Required</option>
+      </select>
+      <div class="overSelect"></div>
+    </div>
+    <div id="checkboxes">
+        <label for="not_required">
+            <input type="checkbox" class="checkbox-variation" id="not_required"/>Not Required            
+        </label>
+      <label for="uniforms_30038">
+        <input type="checkbox" class="checkbox-variation" id="uniforms_30038"/>Mens 3XL
+        <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30037">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30037"/>Mens 2XL
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30036">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30036"/>Mens XL
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30035">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30035"/>Mens L
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30034">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30034"/>Mens M
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30033">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30033"/>Mens S
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30032">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30032"/>Youth XL
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30031">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30031"/>Youth L
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30030">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30030"/>Youth M
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+      <label for="uniforms_30029">
+          <input type="checkbox" class="checkbox-variation" id="uniforms_30029"/>Youth S
+          <input type="text" class="quantity-input inlineRight" value="" placeholder="Qty"/>
+      </label>
+    </div>
+  </div>
+    
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.min.js"></script>
+  
+  <script>
+      $(document).ready(function() {
+          
+          var selectedProduct = 0;
+          var jerseyNameRequired = 'notrequired';
+  
+          $('.selectBox').on('click', function() {
+              var container = $(this).closest(".multiselect")[0];
+              var checkboxes = container.querySelector("#checkboxes");
+              var allCheckboxes = document.querySelectorAll('#checkboxes');
+          
+              allCheckboxes.forEach(function(boxes) {
+              boxes.style.display = (boxes === checkboxes && boxes.style.display === "none") ? "block" : "none";
+              });
+          });
+    
+    
+          $('.checkbox-variation').on('change', function() {
+    
+              var container = $(this).closest(".multiselect")[0];
+              var qtyElem = $(this).closest('label').find('.quantity-input');
+    
+              const checkboxes = container.querySelectorAll('#checkboxes input[type="checkbox"]');
+              const select = container.querySelector('#options-select');
+    
+              var notRequiredCheckbox = checkboxes[0];
+    
+              var prodContainer = $(this).closest('.wp-block-woocommerce-single-product')[0];
+              var prodTitle = prodContainer.querySelector('.wp-block-post-title');
+    
+              var jerseyNameInput = document.getElementById("jerseyName");
+  
+              if (prodTitle.textContent === 'SW Rhinos Jersey'){
+                  // i want only 1 checkbox is checked if this is true
+                  if ($(this).is(':checked')) {
+                  checkboxes.forEach(otherCheckbox => {
+                      if (otherCheckbox !== this) {
+                          otherCheckbox.checked = false;
+                          $(otherCheckbox).siblings('.quantity-input').val('');
+                          }
+                      });
+                      jerseyNameRequired = true;
+                  }                                            
+              }
+              if (notRequiredCheckbox.checked) {
+                  // If "Not Required" is checked, uncheck all other checkboxes
+                  checkboxes.forEach(otherCheckbox => {
+                      if (otherCheckbox !== notRequiredCheckbox) {
+                          otherCheckbox.checked = false;
+                          $(otherCheckbox).siblings('.quantity-input').val('');
+                          $(otherCheckbox).closest('#checkboxes').hide(); // Hide other checkboxes
+                      }
+                  });
+    
+                  let selectedOptions = Array.from(checkboxes)
+                      .filter(checkbox => checkbox.checked && checkbox.id !== 'not_required')
+                      .map(checkbox => checkbox.nextSibling.textContent.trim());
+                  // Set the select option text to "Not Required"
+                  select.options[0].text = 'Not Required';
+                  select.options[0].value = 'not-required';
+                  jerseyNameRequired = false;
+  
+              } else {
+                  let selectedOptions = Array.from(checkboxes)
+                      .filter(checkbox => checkbox.checked && checkbox.id !== 'not_required')
+                      .map(checkbox => checkbox.nextSibling.textContent.trim());
+    
+                  if (selectedOptions.length === 0) {
+                      select.options[0].text = 'Choose an option';
+                      select.options[0].value = '';
+                  } else {
+                      select.options[0].text = selectedOptions.join(', ');
+                      select.options[0].value = 'needtoadd';
+                  }
+              }
+    
+              let selectedOptions = Array.from(checkboxes)
+                  .filter(checkbox => checkbox.checked && checkbox.id !== 'not_required')
+                  .map(checkbox => checkbox.nextSibling.textContent.trim());
+                
+              // Check if the checkbox is checked and automatically set to 1 or clear the quantity Input when checkbox is checked or not
+              if ($(this).is(':checked')) {
+                  if (qtyElem.val() === '0' || qtyElem.val() === '') {
+                      qtyElem.val('1');
+                  }
+                  //console.log(qtyElem.val());
+              } else {
+                  qtyElem.val('');
+              }
+              selectedProduct = getCheckedData().length;
+          });
+    
+    
+    
+          $('.quantity-input').on('input', function() {
+              var quantity = $(this).val();
+              var inlineCheckbox = $(this).closest('label').find('.checkbox-variation');
+              
+              inlineCheckbox.prop('checked', quantity > 0);
+              inlineCheckbox.trigger('change');
+          });
+    
+          function getCheckedData() {
+              const checkboxes = document.querySelectorAll('#checkboxes input[type="checkbox"]');
+              return Array.from(checkboxes)
+                  .filter(checkbox => checkbox.checked)
+                  .map(checkbox => {
+                      const variationIdMatch = checkbox.id.match(/(\d+)/); // Extract numeric part
+                      const variationId = variationIdMatch ? variationIdMatch[1] : ''; // Check if a match was found
+          
+                      return {
+                          product_id: checkbox.closest('.wp-block-woocommerce-single-product').querySelector('[name="product_id"]').value,
+                          variation_id: variationId,
+                          quantity: checkbox.closest('label').querySelector('.quantity-input')?.value || ''
+                      };
+                  });
+          }
+    
+          const waitForElementsLoad = (callback) => {
+              const checkElementsLoaded = () => {
+                  const elementsLoaded = document.querySelectorAll('.single_variation_wrap');
+        
+                  if (elementsLoaded.length > 0) {
+                      callback(elementsLoaded); // Execute the callback if elements are loaded
+                     //console.log('loaded');
+                  } else {
+                      setTimeout(checkElementsLoaded, 100); // Check again after 100 milliseconds
+                    //console.log('loading');
+                  }
+              };    
+              checkElementsLoaded();
+          };
+        
+          waitForElementsLoad((elements) => {
+              // do something with the elements
+              elements.forEach((elem) => {
+                   elem.classList.add('hidden-element');                            
+              });
+              const variationToHide = document.querySelectorAll('.variations');
+               for (let i = 0; i < elements.length; i++) {
+                  variationToHide[i].style.display = 'none';
+                  if (i >= 7) {
+                      break;
+                  }
+              }
+              addtocart();
+              addNotRequiredOption();  
+          });
+        
+          function addtocart() {
+              const customAddToCartButton = document.querySelector('.custom_add_to_cart_button');
+              const loadingSpinner = document.querySelector('.loading-screen');
+      
+              customAddToCartButton.addEventListener('click', async function (e) {
+              e.preventDefault();
+  
+              var jerseyNameInput = document.querySelector("#jerseyName");
+  
+  if (jerseyNameRequired === true) {
+    const jerseyNameValue = jerseyNameInput.value.trim(); // Remove leading/trailing whitespace
+  
+    if (jerseyNameValue === '') {
+      alert('Jersey Surname is required but empty!');
+      return;
+    } else if (!isValidNameOrSurname(jerseyNameValue)) {
+      alert('Invalid Surname. Please enter a valid name or surname.');
+      return;
+    } else {
+      // If the surname is valid, set it in the cookie.
+      Cookies.set("jersey-name", jerseyNameValue);
+    }
+  }
+  
+              //console.log('input element value: ' + jerseyNameInput.value);
+              //console.log('cookie value: ' + Cookies.get("jersey-name"));
+  
+              loadingSpinner.style.display = 'flex';
+          
+              // Find all products with the class "single_variation_wrap"
+              const productsToCart = document.querySelectorAll('.single_variation_wrap');
+              const productsToAdd = [];
+          
+              const addProductDetails = async (product) => {
+                  const requiredStatusSelect = product.closest('.wp-block-woocommerce-single-product').querySelector('#pa_size');
+                  if (requiredStatusSelect) {
+                  const requiredStatus = requiredStatusSelect.value;
+                  if (requiredStatus !== 'not-required' && requiredStatus !== '') {
+                      productsToAdd.push({
+                      product_id: product.querySelector('[name="product_id"]').value,
+                      variation_id: product.querySelector('.variation_id').value,
+                      quantity: product.closest('.wp-block-woocommerce-single-product').querySelector('.qty').value,
+                      });
+                  }
+                  }
+              };
+          
+              const productDetailPromises = Array.from(productsToCart).map(addProductDetails);
+          
+              await Promise.all(productDetailPromises);
+          
+              // Products added via getCheckedData
+              const additionalProducts = getCheckedData();
+          
+              // Check if there are products to add either from requiredStatusSelect or additionalProducts
+                  if (productsToAdd.length > 0 || additionalProducts.length > 0) {
+                      // Use WooCommerce AJAX to add the selected products to the cart
+                      var isAddingToCart = false; // Flag to prevent multiple additions
+                      jQuery.ajax({
+                      type: 'POST',
+                      url: wc_add_to_cart_params.ajax_url,
+                      data: {
+                          action: 'add_to_cart',
+                          products: productsToAdd.concat(additionalProducts),
+                      },
+                      success: function (response) {
+                          
+                          loadingSpinner.style.display = 'none';
+                          if (!isAddingToCart) {
+                          isAddingToCart = true;
+                          // Redirect to the cart page
+                          window.location.href = 'https://rbiaustralia.com.au/checkout';
+                          }
+                      }
+                      });
+                      setTimeout(function() {
+                          //window.location.href = 'https://rbiaustralia.com.au/checkout/';
+                      }, 2000); // 2000 milliseconds = 2 seconds
+                  }
+              });
+          }
+  
+            function isValidNameOrSurname(value) {
+                // Regular expression pattern to require at least one alphabetic character along with spaces and some special characters like apostrophes
+                const pattern = /^[A-Za-z][A-Za-z\s'-]*$/;
+            
+                // Check if the value matches the pattern
+                return pattern.test(value);
+            }
+  
+          function addNotRequiredOption() {
+              // Create the new option element
+              var option = document.createElement('option');
+              option.value = 'not-required';
+              option.text = 'Not Required';
+              option.className = 'attached enabled';
+              option.title = 'Will not be included in add to cart';
+          
+              // Get all select elements with a specific class (you can customize the class as needed)
+              var selectElements = document.querySelectorAll('#pa_size');
+          
+              // Loop through each select element and add the option
+              selectElements.forEach(function(select) {
+              select.appendChild(option.cloneNode(true)); // Clone the option for each select
+              });
+          }
+    
+      });
+  </script>
+
+<script>
+    /*
+    function collectProductDetails() {
+        return Array.from(document.querySelectorAll('.single_variation_wrap'))
+            .map(product => {
+                const commonAncestor = product.closest('.wp-block-woocommerce-single-product');
+                const requiredStatus = document.querySelector('#pa_size').value; // Use the actual selector
+
+                if (requiredStatus !== 'not-required' && requiredStatus !== '') {
+                    return {
+                    product_id: product.querySelector('[name="product_id"]').value,
+                    variation_id: product.querySelector('.variation_id').value,
+                    quantity: commonAncestor.querySelector('.qty').value,
+                    };
+                }
+            })
+        .filter(product => product);
+    }
+    $('#pa_size').on('change', function() {
+        console.log(collectProductDetails());
+    });
+    */
+        /*
+        function getCheckedData() {
+            const checkboxes = document.querySelectorAll('#checkboxes input[type="checkbox"]');
+            let checkedData = Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => {
+                    //const product_id = checkbox.closest('.wp-block-woocommerce-single-product').querySelector('[name="product_id"]').value;
+                    //const variation_id = checkbox.id;
+                    const qtyInput = checkbox.closest('label').querySelector('.quantity-input');
+                    const qty= qtyInput ? qtyInput.value : '';
+                    const productDetails = {
+                        product_id: checkbox.closest('.wp-block-woocommerce-single-product').querySelector('[name="product_id"]').value,
+                        variation_id: checkbox.id,
+                        quantity: qty
+                    }
+                    return productDetails;
+                });
+            //console.log(checkedData);
+            return checkedData;
+        }
+        */
+
+</script>
+

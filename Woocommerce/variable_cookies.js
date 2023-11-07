@@ -13,7 +13,7 @@ function get_wastetype(){
 		// Check if the stored value exists
 		if (waste_type) {
 		  // Use the stored value in your function
-		  console.log("Selected value:", waste_type);
+		  return waste_type;
 		} else {
 		  console.log("No selected value found.");
 		}

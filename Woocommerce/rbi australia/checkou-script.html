@@ -1,0 +1,82 @@
+<script>
+
+  const productNames = document.querySelectorAll('.product-name');
+  const targetText = 'SW Rhinos Jersey';
+  const jerseyDetails = document.querySelector('#jersey_details_field');
+  const jerseyDetails_input = document.querySelector('#jersey_details');
+
+  var label = document.querySelector('label[for="jersey_details"] .optional');
+  
+  let textFound = false; // Initialize a flag to track if the text is found.
+  
+  productNames.forEach(productName => {
+    if (productName.textContent.includes(targetText)) {
+      // The text 'SW Rhinos Jersey' is included in this product's name.
+      //console.log(`The text '${targetText}' is included in: ${productName.textContent}`);
+      textFound = true; // Set the flag to true if the text is found.
+    }
+  });
+  //console.log('cookie value: ' + Cookies.get("jersey-name"));
+  if (textFound) {
+    // If the text is found, display the jersey details field and disable the input.
+    if (isValidNameOrSurname(get_jerseyName())){
+      jerseyDetails.style.display = 'block';
+      jerseyDetails_input.required = true;
+      jerseyDetails_input.readOnly = true;
+      jerseyDetails_input.value = get_jerseyName();
+      label.textContent = '';
+    }else{
+      jerseyDetails.style.display = 'block';
+      jerseyDetails_input.required = true;
+      jerseyDetails_input.readOnly = false;
+      jerseyDetails_input.value = get_jerseyName();
+      label.textContent = '(required)';
+    }
+    
+  } else {
+    // If the text is not found, hide the jersey details field and enable the input.
+    jerseyDetails.style.display = 'none';
+    jerseyDetails_input.required = false;
+    jerseyDetails_input.readOnly = false;
+    jerseyDetails_input.textContent = ''; // Clear the text when not found.
+  }
+  
+  function get_jerseyName() {
+    var jerseyName = Cookies.get("jersey-name");
+  
+    // Check if the stored value exists
+    if (jerseyName) {
+      // Use the stored value in your function
+      return jerseyName;
+    } else {
+      console.log("No selected value found.");
+      return '';
+    }
+  }
+  
+  function isValidNameOrSurname(value) {
+    // Regular expression pattern to require at least one alphabetic character along with spaces and some special characters like apostrophes
+    const pattern = /^[A-Za-z][A-Za-z\s'-]*$/;
+            
+    // Check if the value matches the pattern
+    return pattern.test(value);
+  }
+
+  // Add an event listener to the "Place order" button for the 'click' event
+  const placeOrderButton = document.getElementById('place_order'); // Replace 'place_order' with the actual button ID
+  placeOrderButton.addEventListener('click', function(event) {
+
+    if (jerseyDetails_input.style.display === 'block') {
+      // The jersey details field is visible, so we need to validate the surname.
+      const jerseySurname = jerseyDetails_input.value;
+
+      if (jerseySurname.trim() === '' || !isValidNameOrSurname(jerseySurname)) {
+        // The jersey surname is blank or not valid.
+        alert("Please enter a valid jersey surname.");      
+        event.preventDefault(); // Prevent the button click action.
+
+      }
+    }
+  });
+  
+  </script>
