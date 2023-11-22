@@ -4,7 +4,7 @@ function show_product() {
     // Define an array of product IDs
     $product_ids = array(28828, 29978, 29997, 30013, 30028);
     
-    $page_slug = 'rhinos-uniforms-testing'; // Replace with your common page slug
+    $page_slug = 'rhinos-uniforms'; // Replace with your common page slug
 
     if (is_page($page_slug)) {
         $visibility = 'visible';

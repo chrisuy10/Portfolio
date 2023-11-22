@@ -1,0 +1,47 @@
+
+{
+  "type": "object",
+  "name": "FAQ",
+  "properties": {
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          }
+        },
+        "required": ["question", "answer"]
+      }
+    }
+  },
+  "required": ["questions"]
+}
+
+{
+  "questions": [
+    {
+      "question": "What is the best way to contact customer support?",
+      "answer": "You can contact customer support by email at support@example.com or by phone at 1-800-555-1212."
+    },
+    {
+      "question": "How do I return an item?",
+      "answer": "To return an item, please visit our returns page at https://stackoverflow.com/questions/54524213/django-site-objects-get-current-domain-returns-example-com."
+    },
+    {
+      "question": "What is the warranty policy?",
+      "answer": "Our warranty policy can be found at https://www.termsfeed.com/blog/sample-warranty-policy-template/."
+    }
+  ]
+}
+
+{% for question in faq.questions %}
+  <div class="faq-question">
+    <h3>{{ question.question }}</h3>
+    <p>{{ question.answer }}</p>
+  </div>
+{% endfor %}

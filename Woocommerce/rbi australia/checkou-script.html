@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.0.4/js.cookie.min.js"></script>
 <script>
 
   const productNames = document.querySelectorAll('.product-name');
@@ -79,4 +80,38 @@
     }
   });
   
+  </script>
+
+<form method="post" id="custom-loyalty-signin">
+<button type="submit" name="claim_daily_reward">Claim Daily Reward</button>
+</form>
+  
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+const waitForElementLoad = (callback) => {
+  const checkElementsLoaded = () => {
+    const nextLoaded= document.querySelector('.wlrf-achievement');
+        
+    if (nextLoaded) {
+      callback(); // Execute the callback if elements are loaded
+      console.log('loaded')
+    } else {
+      setTimeout(checkElementsLoaded, 100); // Check again after 100 milliseconds
+      console.log('loading')
+    }
+  };
+    
+  checkElementsLoaded();
+};
+  
+    waitForElementLoad(() => {
+      var cardContainer = document.querySelector('div.wlr-card.wlr-earning-option.wlr-border-color > div.wlr-card-container');
+      var loyaltySignInForm = document.getElementById('custom-loyalty-signin');
+  
+      if (cardContainer && loyaltySignInForm) {
+        cardContainer.appendChild(loyaltySignInForm);
+      }
+    });
+  
+  });
   </script>

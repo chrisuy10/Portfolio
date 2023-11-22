@@ -1,0 +1,6 @@
+[products limit="4" columns="4" category="RECKEN, apparel" cat_operator="AND" orderby="rand"]
+
+[recent_purchased_products limit="4" columns="4"]
+
+[wlr_page_content]
+
