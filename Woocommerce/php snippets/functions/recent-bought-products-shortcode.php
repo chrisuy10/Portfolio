@@ -1,4 +1,5 @@
 <?php 
+//[recent_purchased_products] use this
 //creating a section block of recently bought products via shortcode, to use in different pages
 function recent_purchased_products_shortcode($atts) {
     $args = shortcode_atts(array(
